@@ -45,7 +45,7 @@ func New(opts ...Options) fiber.Handler {
 			defer func() {
 				_ = recover.New()
 			}()
-			to.handler(ctx)
+			_ = to.handler(ctx)
 			ch <- struct{}{}
 		}()
 
