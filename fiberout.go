@@ -51,11 +51,10 @@ func New(opts ...Options) fiber.Handler {
 
 		select {
 		case <-ch:
-			return ctx.Next()
 		case <-time.After(to.timeout):
-			ctx.Status(http.StatusRequestTimeout).SendString(http.StatusText(http.StatusRequestTimeout))
-			return to.response(ctx)
+			return fiber.ErrRequestTimeout
 		}
+		return nil
 
 	}
 }
