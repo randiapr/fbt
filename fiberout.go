@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
 type Timeout struct {
@@ -43,7 +42,7 @@ func New(opts ...Options) fiber.Handler {
 
 		go func() {
 			defer func() {
-				_ = recover.New()
+				_ = recover()
 			}()
 			_ = to.handler(ctx)
 			ch <- struct{}{}
