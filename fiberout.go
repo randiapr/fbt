@@ -19,6 +19,12 @@ func defaultResp(ctx *fiber.Ctx) error {
 	return ctx.Status(http.StatusRequestTimeout).SendString(http.StatusText(http.StatusRequestTimeout))
 }
 
+func Handler(handler fiber.Handler) Options {
+	return func(t *Timeout) {
+		t.handler = handler
+	}
+}
+
 // New
 func New(opts ...Options) fiber.Handler {
 	const defaultTime = 10 * time.Second
